@@ -13,7 +13,7 @@ public class ClientTest {
         System.out.print("Veuillez saisir votre nom : ");
 
         try {
-            ILightStackClient client = new LightSlackClient(lyoko.nextLine());
+            ILightSlackClient client = new LightSlackClient(lyoko.nextLine());
             Registry registry = LocateRegistry.getRegistry(host);
             ILightSlackServer stub = (ILightSlackServer) registry.lookup("LightSlackServer");
             client.registerServer(stub);

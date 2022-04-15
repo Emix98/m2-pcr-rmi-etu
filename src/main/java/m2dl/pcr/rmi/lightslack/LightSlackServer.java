@@ -1,6 +1,5 @@
 package m2dl.pcr.rmi.lightslack;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -12,7 +11,7 @@ public class LightSlackServer implements ILightSlackServer {
 
     List<String> messages = new LinkedList<>();
     String lastMessage;
-    List<ILightStackClient> clients = new LinkedList<>();
+    List<ILightSlackClient> clients = new LinkedList<>();
 
     @Override
     public void sendMessage(String msg) {
@@ -27,13 +26,13 @@ public class LightSlackServer implements ILightSlackServer {
     }
 
     @Override
-    public void registerClient(ILightStackClient client) {
+    public void registerClient(ILightSlackClient client) {
         clients.add(client);
     }
 
     @Override
     public void notifyClients() {
-        for (ILightStackClient client : clients) {
+        for (ILightSlackClient client : clients) {
             try {
                 client.receiveMessage(this.lastMessage);
             } catch (RemoteException e) {
